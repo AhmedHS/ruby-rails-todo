@@ -1,0 +1,8 @@
+<h1>Todo</h1>
+<%= form_with scope: :task, url: tasks_path, local: true do |form| %> 
+    <%= form.text_area :text %>
+    <%= form.submit %>
+<% end %>
+<ul>
+    <li>Test</li>
+</ul>
