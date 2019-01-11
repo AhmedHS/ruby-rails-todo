@@ -5,6 +5,13 @@ class TasksController < ApplicationController
     def create
         @task = Task.new(params.require(:task).permit(:text, :status))
         @task.save
-        redirect_to todo_index_url
+        redirect_to root_path
+    end
+    def edit
+        @task = Task.find(params[:id])
+        @task.update(:status => true)
+        puts "Edited:"
+        puts @task.inspect
+        redirect_to root_path
     end
 end

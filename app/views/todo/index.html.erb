@@ -6,8 +6,11 @@
 <% end %>
 <table>
     <% @tasks.each do |task| %>
-        <tr>
-        <td><%= task.text %></td>
-        </tr>
+        <% if task.status == false %>
+            <tr>
+            <td><%= task.text %></td>
+            <td><%= button_to "x", edit_task_path(task), :method => "get" %></td>
+            </tr>
+        <% end %>
     <% end %>
 </table>
