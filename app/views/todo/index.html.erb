@@ -1,29 +1,33 @@
-<h1>Todo</h1>
-<%= form_with scope: :task, url: tasks_path, local: true do |form| %> 
-    <%= form.text_field :text %>
-    <%= form.hidden_field :status, :value=>false %>
-    <%= form.submit :value=>"+" %>
-<% end %>
-<h2>In Progress</h2>
-<table>
-    <% @tasks.each do |task| %>
-        <% if task.status == false %>
-            <tr>
-            <td><%= task.text %></td>
-            <td><%= button_to "x", edit_task_path(task), :method => "get" %></td>
-            </tr>
-        <% end %>
+<div id="todo">
+    <div id="title">Todo List</div>
+    
+    <%= form_with scope: :task, url: tasks_path, local: true do |form| %> 
+        <%= form.text_field :text, :placeholder=>"i.e Get groceries", :id=>"form" %>
+        <%= form.hidden_field :status, :value=>false %>
+        <%= form.submit "add", :id=>"formSubmit", :class=>"material-icons" %>
     <% end %>
-</table>
-<h2>Completed</h2>
-<table>
-    <% @tasks.each do |task| %>
-        <% if task.status == true %>
-            <tr>
-            <td><strike><%= task.text %></strike></td>
-            <td><%= button_to "+", edit_task_path(task), :method => "get" %></td>
-            <td><%= button_to "x", task_path(task), :method => "delete" %></td>
-            </tr>
+    <hr/>
+    <div class="category">In Progress</div>
+    <table class="tasks">
+        <% @tasks.each do |task| %>
+            <% if task.status == false %>
+                <tr>
+                <td><%= task.text %></td>
+                <td><%= button_to "check", edit_task_path(task), :method => "get", :class=>"material-icons button green" %></td>
+                </tr>
+            <% end %>
         <% end %>
-    <% end %>
-</table>
+    </table>
+    <div class="category">Completed</div>
+    <table class="tasks">
+        <% @tasks.each do |task| %>
+            <% if task.status == true %>
+                <tr>
+                <td><strike><%= task.text %></strike></td>
+                <td><%= button_to "delete", task_path(task), :method => "delete", :class=>"material-icons button red" %>
+                <%= button_to "add", edit_task_path(task), :method => "get", :class=>"material-icons button green" %></td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+</div>
