@@ -1,9 +1,13 @@
 <h1>Todo</h1>
 <%= form_with scope: :task, url: tasks_path, local: true do |form| %> 
-    <%= form.text_area :text %>
+    <%= form.text_field :text %>
     <%= form.hidden_field :status, :value=>false %>
-    <%= form.submit %>
+    <%= form.submit :value=>"+" %>
 <% end %>
-<ul>
-    <li>Test</li>
-</ul>
+<table>
+    <% @tasks.each do |task| %>
+        <tr>
+        <td><%= task.text %></td>
+        </tr>
+    <% end %>
+</table>

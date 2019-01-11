@@ -5,8 +5,6 @@ class TasksController < ApplicationController
     def create
         @task = Task.new(params.require(:task).permit(:text, :status))
         @task.save
-    end
-    def show
-        @task = Task.find(params[:id])
+        redirect_to todo_index_url
     end
 end
